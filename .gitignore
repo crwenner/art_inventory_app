@@ -1,0 +1,17 @@
+# Ignore generated and runtime files
+inventory.csv
+notes/
+public/uploads/
+public/qr/
+*.log
+*.tmp
+.DS_Store
+
+# Ruby / Bundler files
+/vendor/
+.bundle/
+Gemfile.lock
+
+# Docker artifacts
+*.pid
+*.swp
