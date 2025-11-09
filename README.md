@@ -10,6 +10,12 @@ A simple Sinatra web app to manage your homemade art pieces.
 - Export inventory as CSV
 - Persistent data using Docker volumes
 
+## To Do:
+- [ ] Add search functionality
+- [ ] Add soft delete
+- [ ] Add Google sheet sync?
+- [ ] Authentication
+
 ## 🚀 Run Locally (Docker Compose)
 
 ```bash
