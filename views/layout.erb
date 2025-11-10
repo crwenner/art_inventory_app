@@ -1,18 +1,20 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset='utf-8'>
-  <title>🎨 Art Inventory</title>
-  <link rel='stylesheet' href='/css/style.css'>
-</head>
-<body>
-  <header>
-    <h1>🎨 Art Inventory</h1>
-    <nav><a href='/'>Home</a> | <a href='/new'>Add New</a> | <a href='/export'>Export</a></nav>
-  </header>
-  <main class='container'>
-    <%= yield %>
-  </main>
-  <script src='/js/script.js' defer></script>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title><%= @title || "Art Inventory" %></title>
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <% if @flash %>
+        <div class="<%= @flash[:type] %>"><%= @flash[:message] %></div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+
+    <script src="/js/script.js"></script>
+  </body>
 </html>
+
