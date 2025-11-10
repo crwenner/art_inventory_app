@@ -1,16 +1,11 @@
-version: '3.9'
-
+version: '3.8'
 services:
-  art-inventory:
+  art_inventory_app:
     build: .
-    container_name: art_inventory_app
     ports:
       - "4567:4567"
     volumes:
-      - ./inventory.csv:/app/inventory.csv
-      - ./notes:/app/notes
-      - ./public/uploads:/app/public/uploads
-      - ./public/qr:/app/public/qr
+      - .:/app
     environment:
-      - RACK_ENV=production
-    restart: unless-stopped
+      - RACK_ENV=development
+    command: ruby app.rb

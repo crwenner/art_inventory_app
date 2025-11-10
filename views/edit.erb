@@ -1,0 +1,8 @@
+<h2>Edit Art Piece</h2>
+<form action='/update/<%= h(@item[:id]) %>' method='post' enctype='multipart/form-data'>
+  <label>Name: <input type='text' name='name' value='<%= h(@item[:name]) %>' required></label><br><br>
+  <label>Replace image: <input type='file' name='image' accept='image/*'></label><br><br>
+  <label>Sold: <input type='checkbox' name='sold' <%= 'checked' if @item[:sold].to_s == 'true' %>></label><br><br>
+  <label>Sold Where: <input type='text' name='sold_where' value='<%= h(@item[:sold_where]) %>'></label><br><br>
+  <button type='submit'>Save</button> <a href='/'>Cancel</a>
+</form>

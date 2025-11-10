@@ -1,17 +1,55 @@
-# Ignore generated and runtime files
-inventory.csv
-notes/
-public/uploads/
-public/qr/
-*.log
-*.tmp
-.DS_Store
-
-# Ruby / Bundler files
-/vendor/
+# ===== Ruby / Bundler =====
 .bundle/
+vendor/bundle/
+*.gem
+*.rbc
+.bundle
+config.ru~
 Gemfile.lock
 
-# Docker artifacts
-*.pid
+# ===== Logs & temp =====
+log/
+tmp/
+*.log
+*.tmp
 *.swp
+*.swo
+*.bak
+
+# ===== Application data =====
+data/*.csv
+!data/.keep
+
+# ===== Uploads & generated files =====
+public/images/*
+public/qr_codes/*
+
+# ===== Ignore default examples =====
+!public/images/.gitkeep
+!public/qr_codes/.gitkeep
+
+# ===== System =====
+.DS_Store
+Thumbs.db
+*.iml
+.idea/
+.vscode/
+.env
+.env.local
+.env.*
+coverage/
+spec/reports/
+
+# ===== Docker =====
+*.pid
+*.seed
+*.pid.lock
+.docker/
+docker-compose.override.yml
+
+# ===== Archives =====
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+
