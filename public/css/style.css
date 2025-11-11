@@ -1,9 +1,9 @@
 /* =========================================================
-   Art Inventory App — Base Stylesheet
-   Simple, lightweight CSS for clear structure and readability
+   🎨 Art Inventory App — Base Stylesheet
+   Lightweight, human-readable CSS
    ========================================================= */
 
-/* ----- Global Reset & Basics ----- */
+/* ----- Global Reset & Base Layout ----- */
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background-color: #f9fafb;
@@ -13,7 +13,6 @@ body {
   line-height: 1.6;
 }
 
-/* ----- Container Layout ----- */
 .container {
   max-width: 900px;
   margin: 40px auto;
@@ -23,7 +22,7 @@ body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
-/* ----- Headings ----- */
+/* ----- Typography ----- */
 h1, h2, h3 {
   margin-top: 0;
   color: #111;
@@ -57,13 +56,19 @@ input[type="submit"]:hover {
   background-color: #1e40af; /* blue-800 */
 }
 
-/* Secondary button (used for cancel/back links) */
+/* Secondary / Neutral Buttons */
 .button.secondary {
   background-color: #6b7280; /* gray-500 */
 }
 
 .button.secondary:hover {
   background-color: #374151; /* gray-700 */
+}
+
+/* Small Buttons (for actions like Edit/View) */
+.button.small {
+  padding: 4px 8px;
+  font-size: 13px;
 }
 
 /* ----- Tables ----- */
@@ -77,6 +82,7 @@ th, td {
   text-align: left;
   padding: 10px;
   border-bottom: 1px solid #eee;
+  vertical-align: middle;
 }
 
 th {
@@ -88,9 +94,16 @@ tr:hover {
   background-color: #f9fafb;
 }
 
-/* Image thumbnails */
+tr[data-sold="true"] {
+  background-color: #f9f9f9;
+  opacity: 0.8;
+}
+
+/* Thumbnails */
 td img {
   border-radius: 6px;
+  max-width: 120px;
+  height: auto;
 }
 
 /* ----- Forms ----- */
@@ -105,8 +118,8 @@ label {
 }
 
 input[type="text"],
+input[type="number"],
 input[type="file"],
-select,
 textarea {
   width: 100%;
   padding: 8px;
@@ -121,26 +134,27 @@ input[type="checkbox"] {
   margin-right: 6px;
 }
 
-/* ----- Messages ----- */
+/* ----- Notifications ----- */
+.notice,
+.error {
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
 .notice {
   background-color: #ecfccb;
   color: #365314;
   border: 1px solid #bef264;
-  padding: 10px;
-  border-radius: 6px;
-  margin-bottom: 20px;
 }
 
 .error {
   background-color: #fee2e2;
   color: #991b1b;
   border: 1px solid #fca5a5;
-  padding: 10px;
-  border-radius: 6px;
-  margin-bottom: 20px;
 }
 
-/* ----- Action Buttons Group ----- */
+/* ----- Action Bar ----- */
 .actions {
   margin-top: 20px;
 }
@@ -158,13 +172,7 @@ input[type="checkbox"] {
   color: #6b7280;
 }
 
-/* Keep images responsive inside containers */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-
+/* ----- Art Detail (Show Page) ----- */
 .art-detail {
   display: flex;
   flex-wrap: wrap;
@@ -175,7 +183,7 @@ img {
 
 .art-image img {
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .art-info {
@@ -198,3 +206,4 @@ img {
   text-align: center;
   color: #666;
 }
+
