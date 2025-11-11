@@ -2,7 +2,7 @@ require 'csv'
 require 'fileutils'
 
 class Inventory
-  DATA_DIR  = File.expand_path('../../data', __dir__)
+  DATA_DIR = File.expand_path('../data', __dir__)
   FILE_PATH = File.join(DATA_DIR, 'inventory.csv')
 
   HEADERS = %w[id name price image qr_code sold sold_where]
