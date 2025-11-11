@@ -1,9 +1,38 @@
-<h2>Add New Art Piece</h2>
-<form action='/create' method='post' enctype='multipart/form-data'>
-  <label>Name: <input type='text' name='name' required></label><br><br>
-  <label>Price ($):
-    <input type="number" name="price" step="0.01" min="0" required>
-  </label><br><br>
-  <label>Image: <input type='file' name='image' accept='image/*'></label><br><br>
-  <button type='submit'>Add</button> <a href='/'>Cancel</a>
-</form>
+<div class="container">
+  <h2>➕ Add New Art Piece</h2>
+
+  <form action="/create" method="post" enctype="multipart/form-data" class="edit-form">
+    <!-- Name -->
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Enter artwork name" required>
+    </div>
+
+    <!-- Price -->
+    <div class="form-group">
+      <label for="price">Price ($)</label>
+      <input
+        type="number"
+        id="price"
+        name="price"
+        step="0.01"
+        min="0"
+        placeholder="e.g. 45.00"
+        required
+      >
+    </div>
+
+    <!-- Image Upload -->
+    <div class="form-group">
+      <label for="image">Image</label>
+      <input type="file" id="image" name="image" accept="image/*">
+      <p class="text-muted">Upload a clear photo of your art piece (optional).</p>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <button type="submit" class="button">💾 Add Item</button>
+      <a href="/" class="button secondary">Cancel</a>
+    </div>
+  </form>
+</div>

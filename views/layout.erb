@@ -2,19 +2,45 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= @title || "Art Inventory" %></title>
-    <link rel="stylesheet" href="/css/style.css" />
-  </head>
-  <body>
-    <div class="container">
-      <% if @flash %>
-        <div class="<%= @flash[:type] %>"><%= @flash[:message] %></div>
-      <% end %>
 
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><text y=%2214%22 font-size=%2214%22>🎨</text></svg>">
+  </head>
+
+  <body>
+    <!-- ====== App Header ====== -->
+    <header class="site-header">
+      <div class="header-inner">
+        <h1 class="app-title">
+          <a href="/">🎨 Art Inventory</a>
+        </h1>
+        <nav class="nav-links">
+          <a href="/">Home</a>
+          <a href="/new">Add New</a>
+          <a href="/export">Export</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- ====== Flash Messages ====== -->
+    <% if @flash %>
+      <div class="flash <%= @flash[:type] %>">
+        <%= @flash[:message] %>
+      </div>
+    <% end %>
+
+    <!-- ====== Page Content ====== -->
+    <main>
       <%= yield %>
-    </div>
+    </main>
+
+    <!-- ====== Footer ====== -->
+    <footer class="site-footer text-center text-muted">
+      <p>© <%= Time.now.year %> Art Inventory App. Handmade with 🎨 in Ruby + Sinatra.</p>
+    </footer>
 
     <script src="/js/script.js"></script>
   </body>
 </html>
-

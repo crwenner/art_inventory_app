@@ -1,45 +1,133 @@
 /* =========================================================
-   🎨 Art Inventory App — Base Stylesheet
-   Lightweight, human-readable CSS
+   🎨 Art Inventory App — Final Unified Stylesheet
+   Clean, lightweight, consistent design across all pages
    ========================================================= */
 
-/* ----- Global Reset & Base Layout ----- */
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: #f9fafb;
-  color: #333;
+/* ----- Base & Global Layout ----- */
+html, body {
   margin: 0;
   padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f3f4f6;
+  color: #333;
   line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
+main {
+  flex: 1;
+  padding: 2rem 1rem;
+}
+
+/* ----- Container ----- */
 .container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 40px auto;
-  padding: 20px;
+  padding: 30px;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
 }
 
 /* ----- Typography ----- */
 h1, h2, h3 {
   margin-top: 0;
-  color: #111;
+  color: #111827;
 }
 
 h1 {
-  border-bottom: 2px solid #eee;
+  border-bottom: 2px solid #e5e7eb;
   padding-bottom: 10px;
   margin-bottom: 25px;
+  font-size: 1.8rem;
 }
 
-/* ----- Buttons ----- */
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* =========================================================
+   Header & Footer
+   ========================================================= */
+.site-header {
+  background-color: #1e3a8a; /* blue-800 */
+  color: #fff;
+  padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.app-title a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.nav-links a {
+  color: #e0e7ff;
+  margin-left: 1rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: #fff;
+}
+
+.site-footer {
+  background: #f9fafb;
+  padding: 1rem;
+  border-top: 1px solid #e5e7eb;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #6b7280;
+}
+
+/* =========================================================
+   Flash Messages
+   ========================================================= */
+.flash {
+  max-width: 900px;
+  margin: 1rem auto;
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.flash.notice {
+  background-color: #ecfccb;
+  color: #365314;
+  border: 1px solid #bef264;
+}
+
+.flash.error {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+
+/* =========================================================
+   Buttons
+   ========================================================= */
 .button,
 button,
 input[type="submit"] {
   display: inline-block;
-  background-color: #2563eb; /* blue-600 */
+  background-color: #2563eb;
   color: #fff;
   padding: 8px 14px;
   border: none;
@@ -47,66 +135,122 @@ input[type="submit"] {
   text-decoration: none;
   font-size: 14px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .button:hover,
 button:hover,
 input[type="submit"]:hover {
-  background-color: #1e40af; /* blue-800 */
+  background-color: #1e40af;
+  transform: translateY(-1px);
 }
 
-/* Secondary / Neutral Buttons */
 .button.secondary {
-  background-color: #6b7280; /* gray-500 */
+  background-color: #6b7280;
 }
 
 .button.secondary:hover {
-  background-color: #374151; /* gray-700 */
+  background-color: #374151;
 }
 
-/* Small Buttons (for actions like Edit/View) */
 .button.small {
   padding: 4px 8px;
   font-size: 13px;
 }
 
-/* ----- Tables ----- */
-table {
+.actions {
+  margin: 20px 0;
+}
+
+.actions .button {
+  margin-right: 10px;
+}
+
+/* =========================================================
+   Tables
+   ========================================================= */
+.inventory-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 th, td {
   text-align: left;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
+  padding: 10px 14px;
+  border-bottom: 1px solid #e5e7eb;
   vertical-align: middle;
 }
 
 th {
-  background-color: #f3f4f6;
+  background-color: #f9fafb;
+  font-weight: 600;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #fafafa;
+}
+
+tbody tr:hover {
+  background-color: #f1f5f9;
+  transition: background-color 0.2s ease;
+}
+
+/* Sold rows and status colors */
+.sold-row {
+  opacity: 0.85;
+  background-color: #fef2f2 !important;
+}
+
+.status-sold {
+  color: #b91c1c; /* red-700 */
   font-weight: 600;
 }
 
-tr:hover {
-  background-color: #f9fafb;
+.status-available {
+  color: #166534; /* green-700 */
+  font-weight: 600;
 }
 
-tr[data-sold="true"] {
-  background-color: #f9f9f9;
-  opacity: 0.8;
-}
-
-/* Thumbnails */
-td img {
+/* Image thumbnails */
+.thumb {
   border-radius: 6px;
-  max-width: 120px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  max-width: 100px;
   height: auto;
 }
 
-/* ----- Forms ----- */
+.qr-thumb {
+  border-radius: 4px;
+  max-width: 80px;
+  height: auto;
+}
+
+.placeholder {
+  font-size: 2rem;
+  background: #f3f3f3;
+  border: 1px dashed #ccc;
+  padding: 1.2rem;
+  border-radius: 8px;
+  text-align: center;
+  color: #666;
+}
+
+.actions-cell {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* =========================================================
+   Forms
+   ========================================================= */
 form {
   margin-top: 20px;
 }
@@ -134,45 +278,69 @@ input[type="checkbox"] {
   margin-right: 6px;
 }
 
-/* ----- Notifications ----- */
-.notice,
-.error {
-  padding: 10px;
-  border-radius: 6px;
-  margin-bottom: 20px;
+/* Consistent spacing between container header and form */
+.edit-form {
+  margin-top: 1rem;
 }
 
-.notice {
-  background-color: #ecfccb;
-  color: #365314;
-  border: 1px solid #bef264;
+/* Subtle shadow and padding on form inputs */
+.edit-form input[type="text"],
+.edit-form input[type="number"],
+.edit-form input[type="file"] {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.error {
-  background-color: #fee2e2;
-  color: #991b1b;
-  border: 1px solid #fca5a5;
+.edit-form input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+  outline: none;
 }
 
-/* ----- Action Bar ----- */
-.actions {
-  margin-top: 20px;
+/* Optional: center buttons more cleanly on mobile */
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
-.actions .button {
-  margin-right: 10px;
+.form-group {
+  display: flex;
+  flex-direction: column;
 }
 
-/* ----- Utility ----- */
-.text-center {
-  text-align: center;
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
 }
 
-.text-muted {
+.form-group .text-muted {
+  font-size: 0.85rem;
   color: #6b7280;
+  margin-top: 0.25rem;
 }
 
-/* ----- Art Detail (Show Page) ----- */
+.checkbox-group {
+  flex-direction: row;
+  align-items: center;
+}
+
+.thumb-preview {
+  margin-top: 0.5rem;
+  max-width: 200px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* =========================================================
+   Art Detail (Show Page)
+   ========================================================= */
 .art-detail {
   display: flex;
   flex-wrap: wrap;
@@ -183,7 +351,7 @@ input[type="checkbox"] {
 
 .art-image img {
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .art-info {
@@ -197,13 +365,76 @@ input[type="checkbox"] {
   gap: 1rem;
 }
 
-.placeholder {
-  font-size: 2rem;
-  background: #f3f3f3;
-  border: 1px dashed #ccc;
-  padding: 2rem;
-  border-radius: 8px;
+/* =========================================================
+   Utility
+   ========================================================= */
+.text-center {
   text-align: center;
-  color: #666;
 }
 
+.text-muted {
+  color: #6b7280;
+}
+
+/* ===== Show Page Enhancements ===== */
+.art-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+}
+
+.art-image {
+  flex: 1 1 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.art-image-main {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.art-info {
+  flex: 1 1 300px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.art-info p {
+  margin: 0.6rem 0;
+  font-size: 0.95rem;
+}
+
+.qr-thumb-large {
+  display: block;
+  margin-top: 0.5rem;
+  max-width: 150px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Visual status indicators */
+.status-sold {
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.status-available {
+  color: #166534;
+  font-weight: 600;
+}
+
+/* Art actions section */
+.art-actions {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}

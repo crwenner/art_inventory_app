@@ -1,23 +1,37 @@
-<h1><%= @item[:name] %></h1>
+<div class="container">
+  <h2>🖼️ <%= h(@item[:name]) %></h2>
 
-<div class="art-detail">
-  <div class="art-image">
-    <% if @item[:image] && !@item[:image].empty? %>
-      <img src="/<%= @item[:image] %>" alt="<%= @item[:name] %>" width="300">
-    <% else %>
-      <div class="placeholder">🎨 No image available</div>
-    <% end %>
-  </div>
+  <div class="art-detail">
+    <!-- Image Section -->
+    <div class="art-image">
+      <% if @item[:image] && !@item[:image].empty? %>
+        <img src="/<%= @item[:image] %>" alt="<%= h(@item[:name]) %>" class="art-image-main">
+      <% else %>
+        <div class="placeholder">🎨 No image available</div>
+      <% end %>
+    </div>
 
-  <div class="art-info">
-    <p><strong>Sold:</strong> <%= format_sold(@item) %></p>
-    <p><strong>Sold Where:</strong>
-      <%= @item[:sold_where].nil? || @item[:sold_where].empty? ? '—' : @item[:sold_where] %>
-    </p>
+    <!-- Information Section -->
+    <div class="art-info">
+      <p><strong>Price:</strong> $<%= sprintf('%.2f', @item[:price].to_f) %></p>
+      <p><strong>Status:</strong>
+        <span class="<%= @item[:sold].to_s == 'true' ? 'status-sold' : 'status-available' %>">
+          <%= format_sold(@item) %>
+        </span>
+      </p>
+      <p><strong>Sold Where:</strong>
+        <%= @item[:sold_where].to_s.strip.empty? ? '—' : h(@item[:sold_where]) %>
+      </p>
 
-    <div class="art-actions">
-      <a href="/items/<%= @item[:id] %>/edit" class="button">Edit</a>
-      <a href="/" class="button secondary">Back to List</a>
+      <% if @item[:qr_code] && !@item[:qr_code].empty? %>
+        <p><strong>QR Code:</strong></p>
+        <img src="/<%= @item[:qr_code] %>" alt="QR Code for <%= h(@item[:name]) %>" class="qr-thumb-large">
+      <% end %>
+
+      <div class="art-actions">
+        <a href="/items/<%= @item[:id] %>/edit" class="button">✏️ Edit</a>
+        <a href="/" class="button secondary">← Back to List</a>
+      </div>
     </div>
   </div>
 </div>

@@ -1,71 +1,75 @@
-<h1>🎨 Art Inventory</h1>
+<div class="container">
+  <div class="actions">
+    <button id="toggleSold" data-showing="false" class="button secondary">
+      Show Sold Items
+    </button>
+  </div>
 
-<div class="actions">
-  <a href="/new" class="button">Add New Art Piece</a>
-  <button id="toggleSold" data-showing="false" class="button secondary">
-    Show Sold Items
-  </button>
-  <a href="/export" class="button secondary">Export CSV</a>
-</div>
-
-<table class="inventory-table">
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>QR Code</th>
-      <th>Name</th>
-      <th>Price</th>
-      <th>Sold</th>
-      <th>Sold Where</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% if @items.empty? %>
+  <table class="inventory-table">
+    <thead>
       <tr>
-        <td colspan="7" style="text-align:center;">No items yet.</td>
+        <th>Image</th>
+        <th>QR Code</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Sold</th>
+        <th>Sold Where</th>
+        <th>Actions</th>
       </tr>
-    <% else %>
-      <% @items.each do |item| %>
-        <% sold = item[:sold].to_s == 'true' %>
-        <tr data-sold="<%= sold %>" style="<%= sold ? 'display:none;' : '' %>">
-          <!-- Image -->
-          <td>
-            <% if item[:image] && !item[:image].empty? %>
-              <img src="/<%= item[:image] %>" alt="<%= item[:name] %>" width="120">
-            <% else %>
-              🎨
-            <% end %>
-          </td>
-
-          <!-- QR Code -->
-          <td>
-            <% if item[:qr_code] && !item[:qr_code].empty? %>
-              <img src="/<%= item[:qr_code] %>" alt="QR Code for <%= item[:name] %>" width="100">
-            <% else %>
-              —
-            <% end %>
-          </td>
-
-          <!-- Name -->
-          <td><%= item[:name] %></td>
-
-          <!-- Price -->
-          <td>$<%= sprintf('%.2f', item[:price].to_f) %></td>
-
-          <!-- Sold -->
-          <td><%= format_sold(item) %></td>
-
-          <!-- Sold Where -->
-          <td><%= item[:sold_where].to_s.strip.empty? ? '—' : item[:sold_where] %></td>
-
-          <!-- Actions -->
-          <td>
-            <a href="/items/<%= item[:id] %>" class="button small">View</a>
-            <a href="/items/<%= item[:id] %>/edit" class="button small secondary">Edit</a>
-          </td>
+    </thead>
+    <tbody>
+      <% if @items.empty? %>
+        <tr>
+          <td colspan="7" class="text-center text-muted">No items yet.</td>
         </tr>
+      <% else %>
+        <% @items.each do |item| %>
+          <% sold = item[:sold].to_s == 'true' %>
+          <tr
+            data-sold="<%= sold %>"
+            style="<%= sold ? 'display:none;' : '' %>"
+            class="<%= sold ? 'sold-row' : '' %>"
+          >
+            <!-- Image -->
+            <td>
+              <% if item[:image] && !item[:image].empty? %>
+                <img src="/<%= item[:image] %>" alt="<%= item[:name] %>" class="thumb">
+              <% else %>
+                <div class="placeholder">🎨</div>
+              <% end %>
+            </td>
+
+            <!-- QR Code -->
+            <td>
+              <% if item[:qr_code] && !item[:qr_code].empty? %>
+                <img src="/<%= item[:qr_code] %>" alt="QR for <%= item[:name] %>" class="qr-thumb">
+              <% else %>
+                —
+              <% end %>
+            </td>
+
+            <!-- Name -->
+            <td><%= h(item[:name]) %></td>
+
+            <!-- Price -->
+            <td>$<%= sprintf('%.2f', item[:price].to_f) %></td>
+
+            <!-- Sold Status -->
+            <td class="<%= sold ? 'status-sold' : 'status-available' %>">
+              <%= format_sold(item) %>
+            </td>
+
+            <!-- Sold Where -->
+            <td><%= item[:sold_where].to_s.strip.empty? ? '—' : h(item[:sold_where]) %></td>
+
+            <!-- Actions -->
+            <td class="actions-cell">
+              <a href="/items/<%= item[:id] %>" class="button small">View</a>
+              <a href="/items/<%= item[:id] %>/edit" class="button small secondary">Edit</a>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
