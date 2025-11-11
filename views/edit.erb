@@ -1,11 +1,62 @@
-<h2>Edit Art Piece</h2>
-<form action='/update/<%= h(@item[:id]) %>' method='post' enctype='multipart/form-data'>
-  <label>Name: <input type='text' name='name' value='<%= h(@item[:name]) %>' required></label><br><br>
-  <label>Price ($):
-    <input type="number" name="price" value="<%= @item[:price] %>" step="0.01" min="0" required>
-  </label><br><br>
-  <label>Replace image: <input type='file' name='image' accept='image/*'></label><br><br>
-  <label>Sold: <input type='checkbox' name='sold' <%= 'checked' if @item[:sold].to_s == 'true' %>></label><br><br>
-  <label>Sold Where: <input type='text' name='sold_where' value='<%= h(@item[:sold_where]) %>'></label><br><br>
-  <button type='submit'>Save</button> <a href='/'>Cancel</a>
-</form>
+<div class="container">
+  <h2>✏️ Edit Art Piece</h2>
+
+  <form action="/update/<%= h(@item[:id]) %>" method="post" enctype="multipart/form-data" class="edit-form">
+    <!-- Name -->
+    <div class="form-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" value="<%= h(@item[:name]) %>" required>
+    </div>
+
+    <!-- Price -->
+    <div class="form-group">
+      <label for="price">Price ($)</label>
+      <input
+        type="number"
+        id="price"
+        name="price"
+        value="<%= @item[:price] %>"
+        step="0.01"
+        min="0"
+        required
+      >
+    </div>
+
+    <!-- Current Image Preview -->
+    <div class="form-group">
+      <label>Current Image</label>
+      <% if @item[:image] && !@item[:image].empty? %>
+        <img src="/<%= @item[:image] %>" alt="<%= h(@item[:name]) %>" class="thumb-preview">
+      <% else %>
+        <div class="placeholder">🎨 No image uploaded</div>
+      <% end %>
+    </div>
+
+    <!-- Replace Image -->
+    <div class="form-group">
+      <label for="image">Replace Image</label>
+      <input type="file" id="image" name="image" accept="image/*">
+      <p class="text-muted">Leave blank to keep the existing image.</p>
+    </div>
+
+    <!-- Sold Status -->
+    <div class="form-group checkbox-group">
+      <label>
+        <input type="checkbox" name="sold" <%= 'checked' if @item[:sold].to_s == 'true' %>>
+        Mark as Sold
+      </label>
+    </div>
+
+    <!-- Sold Where -->
+    <div class="form-group">
+      <label for="sold_where">Sold Where</label>
+      <input type="text" id="sold_where" name="sold_where" value="<%= h(@item[:sold_where]) %>" placeholder="e.g. Etsy, local market, etc.">
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <button type="submit" class="button">💾 Save Changes</button>
+      <a href="/" class="button secondary">Cancel</a>
+    </div>
+  </form>
+</div>
