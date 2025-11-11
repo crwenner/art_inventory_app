@@ -6,6 +6,8 @@ require_relative 'lib/helpers/app_helpers'
 require_relative 'lib/helpers/file_helpers'
 require_relative 'lib/helpers/qr_code_helpers'
 
+Inventory.initialize_storage
+
 class ArtInventoryApp < Sinatra::Base
   helpers AppHelpers, FileHelpers
 

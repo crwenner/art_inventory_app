@@ -7,6 +7,16 @@ class Inventory
 
   HEADERS = %w[id name image qr_code sold sold_where]
 
+  def self.initialize_storage
+    FileUtils.mkdir_p(DATA_DIR)
+    unless File.exist?(FILE_PATH)
+      CSV.open(FILE_PATH, 'w', write_headers: true, headers: HEADERS) {}
+      puts "✅ Created new inventory CSV at #{FILE_PATH}"
+    else
+      puts "✅ Found existing inventory CSV with #{CSV.read(FILE_PATH, headers: true).count} records"
+    end
+  end
+
   # --- Return all items as an array of hashes ---
   def self.all
     return [] unless File.exist?(FILE_PATH)
@@ -35,6 +45,8 @@ class Inventory
 
   # --- Add a new item ---
   def self.add(params)
+    initialize_storage
+
     FileUtils.mkdir_p(DATA_DIR)
 
     id   = next_id
