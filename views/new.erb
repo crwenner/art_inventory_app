@@ -1,6 +1,9 @@
 <h2>Add New Art Piece</h2>
 <form action='/create' method='post' enctype='multipart/form-data'>
   <label>Name: <input type='text' name='name' required></label><br><br>
+  <label>Price ($):
+    <input type="number" name="price" step="0.01" min="0" required>
+  </label><br><br>
   <label>Image: <input type='file' name='image' accept='image/*'></label><br><br>
   <button type='submit'>Add</button> <a href='/'>Cancel</a>
 </form>

@@ -5,7 +5,7 @@ class Inventory
   DATA_DIR  = File.expand_path('../../data', __dir__)
   FILE_PATH = File.join(DATA_DIR, 'inventory.csv')
 
-  HEADERS = %w[id name image qr_code sold sold_where]
+  HEADERS = %w[id name price image qr_code sold sold_where]
 
   def self.initialize_storage
     FileUtils.mkdir_p(DATA_DIR)
@@ -27,6 +27,7 @@ class Inventory
         name:       row['name'],
         image:      row['image'],
         qr_code:    row['qr_code'],
+        price:      row['price'],
         sold:       row['sold'].to_s.downcase,
         sold_where: row['sold_where']
       }
@@ -51,6 +52,7 @@ class Inventory
 
     id   = next_id
     name = params['name']
+    price = params['price']
 
     # Save uploaded image (if provided)
     image_path = FileHelpers.save_image(params['image'], id)
@@ -63,6 +65,7 @@ class Inventory
       name:       name,
       image:      image_path,
       qr_code:    qr_code_path,
+      price:      price,
       sold:       'false',
       sold_where: ''
     }
@@ -83,6 +86,7 @@ class Inventory
     return unless item
 
     item[:name]       = params['name'] unless params['name'].to_s.strip.empty?
+    item[:price]      = params['price'] unless params['price'].to_s.strip.empty?
     item[:sold]       = (params['sold'].to_s == 'on' || params['sold'].to_s == 'true') ? 'true' : 'false'
     item[:sold_where] = params['sold_where'] || ''
 

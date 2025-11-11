@@ -18,6 +18,9 @@ class ArtInventoryApp < Sinatra::Base
     set :public_folder, File.join(settings.root, 'public')
     set :views, File.join(settings.root, 'views')
     set :static, true
+
+    # ✅ Allow Docker/remote access by disabling host authorization
+    set :host_authorization, { permitted_hosts: [] }
   end
 
   get '/' do
