@@ -1,9 +1,200 @@
-body{font-family:Arial,Helvetica,sans-serif;margin:20px;background:#fafafa;color:#222}
-.container{max-width:1100px;margin:0 auto}
-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
-nav a{margin-right:8px;text-decoration:none;color:#007acc}
-.controls{margin-bottom:12px}
-table{width:100%;border-collapse:collapse;background:#fff}
-th,td{border:1px solid #e1e1e1;padding:8px;text-align:left}
-tr.sold{background:#fff1f0}
-.btn{display:inline-block;padding:6px 10px;background:#007acc;color:#fff;border-radius:6px;text-decoration:none}
+/* =========================================================
+   Art Inventory App — Base Stylesheet
+   Simple, lightweight CSS for clear structure and readability
+   ========================================================= */
+
+/* ----- Global Reset & Basics ----- */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #f9fafb;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+/* ----- Container Layout ----- */
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* ----- Headings ----- */
+h1, h2, h3 {
+  margin-top: 0;
+  color: #111;
+}
+
+h1 {
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 25px;
+}
+
+/* ----- Buttons ----- */
+.button,
+button,
+input[type="submit"] {
+  display: inline-block;
+  background-color: #2563eb; /* blue-600 */
+  color: #fff;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.button:hover,
+button:hover,
+input[type="submit"]:hover {
+  background-color: #1e40af; /* blue-800 */
+}
+
+/* Secondary button (used for cancel/back links) */
+.button.secondary {
+  background-color: #6b7280; /* gray-500 */
+}
+
+.button.secondary:hover {
+  background-color: #374151; /* gray-700 */
+}
+
+/* ----- Tables ----- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+th {
+  background-color: #f3f4f6;
+  font-weight: 600;
+}
+
+tr:hover {
+  background-color: #f9fafb;
+}
+
+/* Image thumbnails */
+td img {
+  border-radius: 6px;
+}
+
+/* ----- Forms ----- */
+form {
+  margin-top: 20px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+input[type="text"],
+input[type="file"],
+select,
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  margin-top: 6px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+input[type="checkbox"] {
+  margin-right: 6px;
+}
+
+/* ----- Messages ----- */
+.notice {
+  background-color: #ecfccb;
+  color: #365314;
+  border: 1px solid #bef264;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.error {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+/* ----- Action Buttons Group ----- */
+.actions {
+  margin-top: 20px;
+}
+
+.actions .button {
+  margin-right: 10px;
+}
+
+/* ----- Utility ----- */
+.text-center {
+  text-align: center;
+}
+
+.text-muted {
+  color: #6b7280;
+}
+
+/* Keep images responsive inside containers */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+.art-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+}
+
+.art-image img {
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.art-info {
+  flex: 1;
+  min-width: 250px;
+}
+
+.art-actions {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.placeholder {
+  font-size: 2rem;
+  background: #f3f3f3;
+  border: 1px dashed #ccc;
+  padding: 2rem;
+  border-radius: 8px;
+  text-align: center;
+  color: #666;
+}

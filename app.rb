@@ -4,7 +4,9 @@ require 'securerandom'
 require_relative 'models/inventory'
 require_relative 'lib/helpers/app_helpers'
 require_relative 'lib/helpers/file_helpers'
-require_relative 'lib/services/qr_service'
+require_relative 'lib/helpers/qr_code_helpers'
+
+Inventory.initialize_storage
 
 class ArtInventoryApp < Sinatra::Base
   helpers AppHelpers, FileHelpers
@@ -19,18 +21,7 @@ class ArtInventoryApp < Sinatra::Base
   end
 
   get '/' do
-    @show_sold = params['show_sold'] == 'true'
-    @search = params['search'].to_s.strip
     @items = Inventory.all
-
-    unless @search.empty?
-      q = @search.downcase
-      @items = @items.select do |it|
-        [it[:name], it[:id], it[:sold_where]].any? { |f| f.to_s.downcase.include?(q) }
-      end
-    end
-
-    @items = @items.reject { |it| it[:sold].to_s == 'true' } unless @show_sold
     erb :index
   end
 
@@ -43,10 +34,32 @@ class ArtInventoryApp < Sinatra::Base
     redirect '/'
   end
 
-  get '/edit/:id' do
-    @item = Inventory.find(params[:id])
-    halt 404, 'Not found' unless @item
-    erb :edit
+  get '/items/:id' do
+    id = params[:id]
+    puts "DEBUG: Looking for item id=#{id.inspect} — Inventory.all.size=#{Inventory.all.size}"
+    puts "DEBUG: sample rows: #{Inventory.all.first(5).inspect}"
+
+    @item = Inventory.find(id)
+
+    if @item
+      erb :show
+    else
+      status 404
+      "Item not found"
+    end
+  end
+
+  # Show the edit form for a single item
+  get '/items/:id/edit' do
+    id = params[:id]
+    @item = Inventory.find(id)
+
+    if @item
+      erb :edit
+    else
+      status 404
+      "Item not found"
+    end
   end
 
   post '/update/:id' do
@@ -56,6 +69,12 @@ class ArtInventoryApp < Sinatra::Base
 
   post '/toggle_sold/:id' do
     Inventory.toggle_sold(params[:id], params['sold_where'])
+    redirect '/'
+  end
+
+  post '/items/:id/delete' do
+    id = params[:id]
+    Inventory.delete_item(id)
     redirect '/'
   end
 

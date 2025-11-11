@@ -1,49 +1,54 @@
-<div class='controls'>
-  <form method='get' action='/' style='display:inline-block'>
-    <input type='text' name='search' placeholder='Search name or sold where' value='<%= h(@search) %>'>
-    <button type='submit'>Search</button>
-  </form>
+<h1>🎨 Art Inventory</h1>
 
-  <label style='margin-left:1rem'>
-    <input type='checkbox' onchange='toggleSold(this)' <%= 'checked' if @show_sold %>>
-    Show Sold
-  </label>
-
-  <a class='btn' href='/new' style='margin-left:1rem'>➕ Add New</a>
+<div class="actions">
+  <a href="/new" class="button">Add New Art Piece</a>
+  <button id="toggleSold" data-showing="false" class="button secondary">
+    Show Sold Items
+  </button>
+  <a href="/export" class="button secondary">Export CSV</a>
 </div>
 
-<% if @items.nil? || @items.empty? %>
-  <p>No items yet.</p>
-<% else %>
-  <table>
-    <thead><tr><th>ID</th><th>Name</th><th>Image</th><th>QR</th><th>Sold</th><th>Sold Where</th><th>Actions</th></tr></thead>
-    <tbody>
-      <% @items.each do |it| %>
-        <% id = it[:id].to_s %>
-        <% name = it[:name].to_s %>
-        <% img = it[:image_path].to_s %>
-        <% qr = it[:qr_code].to_s %>
-        <% sold = it[:sold].to_s %>
-        <% sold_where = it[:sold_where].to_s %>
-
-        <tr class='<%= 'sold' if sold == 'true' %>'>
-          <td><%= h(id) %></td>
-          <td><%= h(name) %></td>
-          <td><% if img != '' %><img src='/<%= img %>' width='80'><% else %><em>—</em><% end %></td>
-          <td><% if qr != '' %><img src='/<%= qr %>' width='80'><% else %><em>—</em><% end %></td>
-          <td><%= sold == 'true' ? '✅' : '❌' %></td>
-          <td><%= h(sold_where) %></td>
-          <td><a href='/edit/<%= id %>'>Edit</a>
-            <% if sold != 'true' %>
-              <form action='/toggle_sold/<%= id %>' method='post' style='display:inline'>
-                <input type='text' name='sold_where' placeholder='Where sold?'><button>Mark Sold</button>
-              </form>
+<table class="inventory-table">
+  <thead>
+    <tr>
+      <th>Image</th>
+      <th>QR Code</th>
+      <th>Name</th>
+      <th>Sold</th>
+      <th>Sold Where</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @items.empty? %>
+      <tr><td colspan="6">No items yet.</td></tr>
+    <% else %>
+      <% @items.each do |item| %>
+        <% sold = item[:sold].to_s == 'true' %>
+        <tr data-sold="<%= sold %>" style="<%= sold ? 'display:none;' : '' %>">
+          <td>
+            <% if item[:image] && !item[:image].empty? %>
+              <img src="/<%= item[:image] %>" alt="<%= item[:name] %>" width="120">
+            <% else %>
+              🎨
             <% end %>
+          </td>
+          <td>
+            <% if item[:qr_code] && !item[:qr_code].empty? %>
+              <img src="/<%= item[:qr_code] %>" alt="QR Code for <%= item[:name] %>" width="100">
+            <% else %>
+              —
+            <% end %>
+          </td>
+          <td><%= item[:name] %></td>
+          <td><%= format_sold(item) %></td>
+          <td><%= item[:sold_where].to_s.empty? ? '—' : item[:sold_where] %></td>
+          <td>
+            <a href="/items/<%= item[:id] %>" class="button small">View</a>
+            <a href="/items/<%= item[:id] %>/edit" class="button small secondary">Edit</a>
           </td>
         </tr>
       <% end %>
-    </tbody>
-  </table>
-<% end %>
-
-<script>function toggleSold(cb){ const params=new URLSearchParams(window.location.search); if(cb.checked) params.set('show_sold','true'); else params.delete('show_sold'); window.location.search = params.toString(); }</script>
+    <% end %>
+  </tbody>
+</table>

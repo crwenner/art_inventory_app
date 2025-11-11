@@ -1,0 +1,23 @@
+<h1><%= @item[:name] %></h1>
+
+<div class="art-detail">
+  <div class="art-image">
+    <% if @item[:image] && !@item[:image].empty? %>
+      <img src="/<%= @item[:image] %>" alt="<%= @item[:name] %>" width="300">
+    <% else %>
+      <div class="placeholder">🎨 No image available</div>
+    <% end %>
+  </div>
+
+  <div class="art-info">
+    <p><strong>Sold:</strong> <%= format_sold(item) %></p>
+    <p><strong>Sold Where:</strong>
+      <%= @item[:sold_where].nil? || @item[:sold_where].empty? ? '—' : @item[:sold_where] %>
+    </p>
+
+    <div class="art-actions">
+      <a href="/items/<%= @item[:id] %>/edit" class="button">Edit</a>
+      <a href="/" class="button secondary">Back to List</a>
+    </div>
+  </div>
+</div>
