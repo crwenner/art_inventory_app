@@ -22,19 +22,23 @@
   </thead>
   <tbody>
     <% if @items.empty? %>
-      <tr><td colspan="6">No items yet.</td></tr>
+      <tr>
+        <td colspan="7" style="text-align:center;">No items yet.</td>
+      </tr>
     <% else %>
       <% @items.each do |item| %>
         <% sold = item[:sold].to_s == 'true' %>
         <tr data-sold="<%= sold %>" style="<%= sold ? 'display:none;' : '' %>">
+          <!-- Image -->
           <td>
             <% if item[:image] && !item[:image].empty? %>
               <img src="/<%= item[:image] %>" alt="<%= item[:name] %>" width="120">
-              <td>$<%= sprintf('%.2f', item[:price].to_f) %></td>
             <% else %>
               🎨
             <% end %>
           </td>
+
+          <!-- QR Code -->
           <td>
             <% if item[:qr_code] && !item[:qr_code].empty? %>
               <img src="/<%= item[:qr_code] %>" alt="QR Code for <%= item[:name] %>" width="100">
@@ -42,10 +46,20 @@
               —
             <% end %>
           </td>
+
+          <!-- Name -->
           <td><%= item[:name] %></td>
+
+          <!-- Price -->
           <td>$<%= sprintf('%.2f', item[:price].to_f) %></td>
+
+          <!-- Sold -->
           <td><%= format_sold(item) %></td>
-          <td><%= item[:sold_where].to_s.empty? ? '—' : item[:sold_where] %></td>
+
+          <!-- Sold Where -->
+          <td><%= item[:sold_where].to_s.strip.empty? ? '—' : item[:sold_where] %></td>
+
+          <!-- Actions -->
           <td>
             <a href="/items/<%= item[:id] %>" class="button small">View</a>
             <a href="/items/<%= item[:id] %>/edit" class="button small secondary">Edit</a>

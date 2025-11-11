@@ -10,7 +10,7 @@
   </div>
 
   <div class="art-info">
-    <p><strong>Sold:</strong> <%= format_sold(item) %></p>
+    <p><strong>Sold:</strong> <%= format_sold(@item) %></p>
     <p><strong>Sold Where:</strong>
       <%= @item[:sold_where].nil? || @item[:sold_where].empty? ? '—' : @item[:sold_where] %>
     </p>
